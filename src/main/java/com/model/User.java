@@ -5,45 +5,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Component
 public class User {
-	private String name;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String password;
-	private long mobile;
-	private String email;
-	public String getName() {
-		return name;
+	public User() {
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
+	public User(int id, String name, String password, long mobile, String email) {
+		super();
 		this.id = id;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
+		this.name = name;
 		this.password = password;
-	}
-	public long getMobile() {
-		return mobile;
-	}
-	public void setMobile(long mobile) {
 		this.mobile = mobile;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private @Getter @Setter int id;
+	private @Getter @Setter String name;
+	private @Getter @Setter String password;
+	private @Getter @Setter long mobile;
+	private @Getter @Setter String email;
 	
 	
 

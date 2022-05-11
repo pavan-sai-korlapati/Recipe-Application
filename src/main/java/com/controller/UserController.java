@@ -14,39 +14,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.model.User;
-import com.repo.UserRepo;
+import com.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-//@RequestMapping("/")
+@RequestMapping(value="user")
 @Api(value = "User Controller", description = "Values for user controller")
 public class UserController {
 	
 	@Autowired
-	UserRepo userRepo;
+	UserService userService;
 	
-	@PostMapping("/adduser")
+	@PostMapping(value="/addUser")
 	@ApiOperation(value = "Get user details",httpMethod = "POST")
 	public ResponseEntity<?> getUserDetails(@RequestBody User user){
-		userRepo.save(user);
+		userService.save(user);
 		return new ResponseEntity<>("User added",HttpStatus.OK);
 	}
 	
-	@GetMapping("/showusers")
+	@GetMapping(value="/showusers")
 	@ApiOperation(value = "Show all users",httpMethod = "GET")
 	public ResponseEntity<?> showAllUsers(){
 		List<User> users = new ArrayList<User>();
-		users = userRepo.findAll();
+		users = userService.findAll();
 		return new ResponseEntity<>(users,HttpStatus.OK);
 	}
 	
-	@GetMapping("/showuser")
-	@ApiOperation(value = "Show single users",httpMethod = "GET")
+	@GetMapping(value="/showUserById")
+	@ApiOperation(value = "Show single user",httpMethod = "GET")
 	public ResponseEntity<?> showUserDetails(@RequestParam int id){
 		User user = new User();
-		user = userRepo.getById(id);
+		user = userService.getById(id);
 		return new ResponseEntity<>(user,HttpStatus.OK);
 	}
 }

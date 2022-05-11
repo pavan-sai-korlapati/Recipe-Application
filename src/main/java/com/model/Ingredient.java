@@ -5,27 +5,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Component
 public class Ingredient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String name;
-	private int quantityInMg;
-	public Ingredient() {
-		// TODO Auto-generated constructor stub
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getQuantityInMg() {
-		return quantityInMg;
-	}
-	public void setQuantityInMg(int quantityInMg) {
-		this.quantityInMg = quantityInMg;
-	}
+	private @Getter @Setter String name;
+	private @Getter @Setter int quantityInMg;
 	
 }
