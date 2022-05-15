@@ -1,4 +1,4 @@
-package com.controller;
+package com.recipe.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.User;
-import com.service.UserService;
+import com.recipe.model.User;
+import com.recipe.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value="user")
+@RequestMapping(value="/user")
 @Api(value = "User Controller", description = "Values for user controller")
 public class UserController {
 	

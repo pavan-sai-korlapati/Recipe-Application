@@ -1,4 +1,4 @@
-package com.model;
+package com.recipe.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,11 +12,13 @@ import lombok.Setter;
 
 @Entity
 @Component
+@Getter
+@Setter
 public class Ingredient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private @Getter @Setter String name;
-	private @Getter @Setter int quantityInMg;
+	private String name;
+	private int quantityInMg;
 	
 }

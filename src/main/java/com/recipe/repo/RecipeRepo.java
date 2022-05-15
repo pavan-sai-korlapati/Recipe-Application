@@ -1,12 +1,12 @@
-package com.repo;
+package com.recipe.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.model.Dish;
+import com.recipe.model.Recipe;
 
 
 @Repository
-public interface DishRepo extends JpaRepository<Dish, Integer>{
+public interface RecipeRepo extends JpaRepository<Recipe, Integer>{
 
 }
