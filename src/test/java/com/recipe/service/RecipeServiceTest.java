@@ -54,7 +54,7 @@ public class RecipeServiceTest {
 	void createRecipeTest1() {
 		
 	when(recipeRepo.save(recipe1)).thenReturn(recipe1);
-	assertEquals(recipe1, recipeService.save(recipe1));
+	assertEquals(recipe1, recipeService.save(recipe1,1));
 		
 	}
 	

@@ -17,6 +17,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -34,6 +36,7 @@ public class Recipe {
 	private String name;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonIgnore
 	private int recipeId;
 	private boolean isVeg;
 	@OneToMany(targetEntity = Ingredient.class, cascade = CascadeType.ALL)
@@ -42,6 +45,7 @@ public class Recipe {
 	private String instructions;
 	@CreatedBy
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 	@LastModifiedDate
 	private Date modifiedDate;

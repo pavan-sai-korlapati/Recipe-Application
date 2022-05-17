@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.recipe.exception.UserNotFoundException;
 import com.recipe.model.User;
 import com.recipe.service.UserService;
 
@@ -44,10 +45,10 @@ public class UserController {
 	
 	@GetMapping(value="/showUserById")
 	@ApiOperation(value = "Show single user",httpMethod = "GET")
-	public ResponseEntity<?> showUserDetails(@RequestParam int id){
-		User user = new User();
-		user = userService.getById(id);
-		return new ResponseEntity<>(user,HttpStatus.OK);
+	public ResponseEntity<?> showUserDetails(@RequestParam int id)throws UserNotFoundException{
+		if(userService.existsById(id))
+		return new ResponseEntity<>(userService.getById(id),HttpStatus.OK);
+		throw new UserNotFoundException("User not found");
 	}
 }
 

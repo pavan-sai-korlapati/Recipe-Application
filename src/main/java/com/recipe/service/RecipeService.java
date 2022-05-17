@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.recipe.model.Recipe;
 import com.recipe.repo.RecipeRepo;
+import com.recipe.repo.UserRepo;
 
 @Service
 public class RecipeService {
 	@Autowired
 	RecipeRepo recipeRepo;
+	@Autowired
+	UserRepo userRepo;
 
-	public Recipe save(Recipe dish) {
+	public Recipe save(Recipe dish,int userId) {
+		dish.setUser(userRepo.getById(userId));
 		return recipeRepo.save(dish);
 		
 	}
@@ -26,6 +30,15 @@ public class RecipeService {
 		return recipeRepo.getById(id);
 	}
 	
+	public boolean existsById(int recipeId) {
+		return recipeRepo.existsById(recipeId);
+	}
 	
+	public void deleteById(int id) {
+			recipeRepo.deleteById(id);
+	}
+	public List<Recipe> getVegRecipes(boolean isVeg){
+		return recipeRepo.findByIsVeg(isVeg);
+	}
 
 }

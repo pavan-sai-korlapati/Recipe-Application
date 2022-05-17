@@ -24,4 +24,8 @@ public class UserService {
 	public User getById(int id) {
 		return userRepo.getById(id);
 	}
+	
+	public boolean existsById(int userId) {
+		return (userRepo.existsById(userId));
+	}
 }
