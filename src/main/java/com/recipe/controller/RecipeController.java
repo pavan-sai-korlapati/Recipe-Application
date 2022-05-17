@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recipe.exception.RecipeNotFoundException;
-import com.recipe.exception.UserNotFoundException;
 import com.recipe.model.Recipe;
 import com.recipe.service.RecipeService;
-import com.recipe.service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,14 +28,12 @@ public class RecipeController {
 	
 	@Autowired
 	RecipeService recipeService;
-	@Autowired
-	UserService userService;
 	
 	@PostMapping(value="/addRecipe")
 	@ApiOperation(value = "Get recipe details",httpMethod = "POST")
-	public ResponseEntity<?> getRecipeDetails(@RequestBody Recipe dish,@RequestParam int userId)throws UserNotFoundException{
-		if(!userService.existsById(userId)) throw new UserNotFoundException("User doesnot exist");
-		recipeService.save(dish,userId);
+	public ResponseEntity<?> getRecipeDetails(@RequestBody Recipe dish){
+		
+		recipeService.save(dish);
 		return new ResponseEntity<>("Dish added",HttpStatus.OK);
 	}
 	
@@ -59,9 +55,9 @@ public class RecipeController {
 	
 	@DeleteMapping(value="/deleteRecipeById")
 	@ApiOperation(value = "Delete single recipe",httpMethod = "DELETE")
-	public ResponseEntity<?> deleteRecipeById(@RequestParam int id) throws RecipeNotFoundException{
-		if(recipeService.existsById(id)) {
-			recipeService.deleteById(id);
+	public ResponseEntity<?> deleteRecipeById(@RequestParam int recipeId) throws RecipeNotFoundException{
+		if(recipeService.existsById(recipeId)) {
+			recipeService.deleteById(recipeId);
 			return new ResponseEntity<String>("Succesfully deleted.",HttpStatus.OK);
 		}
 		throw new RecipeNotFoundException("No recipe found for given ID");
@@ -74,5 +70,19 @@ public class RecipeController {
 		return new ResponseEntity<>(recipes,HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/showNonVegRecipes")
+	@ApiOperation(value = "Show Non-veg recipes",httpMethod = "GET")
+	public ResponseEntity<?> showNonVegRecipes(){
+		List<Recipe> recipes = recipeService.getVegRecipes(false);
+		return new ResponseEntity<>(recipes,HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/updateRecipe")
+	@ApiOperation(value = "Update recipe details using userId",httpMethod = "POST")
+	public ResponseEntity<?> updateRecipe(@RequestBody Recipe recipe,@RequestParam int recipeId){
+		recipe.setRecipeId(recipeId);
+		recipeService.save(recipe);
+		return new ResponseEntity<String>("Recipe Updated",HttpStatus.ACCEPTED);
+	}
 
 }

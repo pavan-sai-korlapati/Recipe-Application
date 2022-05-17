@@ -15,8 +15,10 @@ import javax.persistence.OneToMany;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -43,13 +45,10 @@ public class Recipe {
 	@JoinColumn(name = "fk", referencedColumnName = "recipeId")
 	private List<Ingredient> ingredients;
 	private String instructions;
-	@CreatedBy
-	@ManyToOne
-	@JsonIgnore
-	private User user;
 	@LastModifiedDate
 	private Date modifiedDate;
 	@CreatedDate
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date createdDate;
 	
 	
