@@ -23,10 +23,10 @@ public class ControllerExceptionHandling {
 		return new ResponseEntity<>(errorBody,HttpStatus.NOT_FOUND);
 	}
 	@ExceptionHandler(Exception.class)
-	public void exceptionHandler (RecipeNotFoundException recipeNotFound){
+	public void exceptionHandler (Exception exception){
 		Map<String, Object> errorBody = new LinkedHashMap<>();
 		errorBody.put("error", "Creation Failed");
 		errorBody.put("timestamp", LocalDateTime.now());
-		errorBody.put("details", recipeNotFound.getMessage());
+		errorBody.put("details", exception.getMessage());
 	}
 }
