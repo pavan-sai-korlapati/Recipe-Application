@@ -21,9 +21,8 @@ import com.recipe.service.RecipeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@RestController
-@RequestMapping(value="/recipe")
-@Api(value = "Recipe Controller", description = "CRUD for recipies")
+@RestController("/recipe")
+ @Api(value = "Recipe Controller", description = "CRUD for recipies")
 public class RecipeController {
 	
 	@Autowired

@@ -14,7 +14,6 @@ public class RecipeService {
 	RecipeRepo recipeRepo;
 
 	public Recipe save(Recipe dish) {
-		//dish.setUser(userRepo.getById(userId));
 		return recipeRepo.save(dish);
 		
 	}
